@@ -13,18 +13,36 @@ body {
 }
 
 #page-wrapper {
-    padding: 0 15px;
+    padding: 15px;
     min-height: 568px;
-    background-color: #fff;
+    background-color: #A6CDDB;
 }
 
-@media(min-width:768px) {
-    #page-wrapper {
-        position: inherit;
-        margin: 0 0 0 250px;
-        padding: 0 30px;
-        border-left: 1px solid #e7e7e7;
-    }
+.alert-wrapper {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 80%;
+}
+
+.event-wrapper {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 80%;
+}
+.cond-alert {
+    height: 40px;
+    line-height: 40px;
+}
+.icon-circle {
+    z-index: 100;
+    width: 40px;
+    border-radius: 50% 50% 50% 50%;
+    text-align: center;
+    font-size: 1.4em;
+    color: #FFF200;
+    background-color: #999999;
 }
 
 .navbar-top-links {
