@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 class Alert(models.Model):
@@ -17,6 +18,8 @@ class Event(models.Model):
     datestamp = models.DateField() # Makes group_by queries on days easier
 
     def save(self, *args, **kwargs):
+        self.result = False
+        self.timestamp = datetime.datetime.now()
         self.datestamp = datetime.date(
                             year=self.timestamp.year,
                             month=self.timestamp.month,

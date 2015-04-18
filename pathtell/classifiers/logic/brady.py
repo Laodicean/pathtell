@@ -1,7 +1,7 @@
 from feed.models import Event
 
 
-def detect_daily_brady(daily_heart_rate):
+def detect_daily_brady(person, daily_heart_rate):
     """
     --- Detect Ventricular Bradychardia ---
      -> If resting heart rate is ever under 50
@@ -10,7 +10,7 @@ def detect_daily_brady(daily_heart_rate):
      -> If resting heart rate is ever under 100
      -> Is infant
     """
-    if user.is_infant():
+    if person.is_infant():
         # Check for infantile bradychardia
         for hb in daily_heart_rate:
             if hb < 100:
@@ -22,4 +22,4 @@ def detect_daily_brady(daily_heart_rate):
             if hb < 50:
                 new_event 
                 return 'ventricular'
-    return
+    return 'healthy'

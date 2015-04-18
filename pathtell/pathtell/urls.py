@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^', include('feed.urls')),
     url(r'^', include('landing.urls')),
     url(r'^auth/', include('appauth.urls')),
+    url(r'^service/', include('services.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
 ]

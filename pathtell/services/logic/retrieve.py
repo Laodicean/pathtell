@@ -1,4 +1,5 @@
 from classifiers.models import HeartBeatData
+import datetime
 
 
 def _simulate_heart_beats(person_id, frequency, heart_rate, commit_to_db=True):
@@ -13,7 +14,7 @@ def _simulate_heart_beats(person_id, frequency, heart_rate, commit_to_db=True):
 
     initial_datetime = datetime.datetime.now()
 
-    for i in xrange(day_freq_count):
+    for i in xrange(int(day_freq_count)):
         fsecs = max(1, int(1/float(frequency)))
         beat_timestamp  = initial_datetime + datetime.timedelta(seconds=fsecs)
 
@@ -22,6 +23,7 @@ def _simulate_heart_beats(person_id, frequency, heart_rate, commit_to_db=True):
             rate=heart_rate,
             frequency=frequency,
             beat_timestamp=beat_timestamp,
+            beat_date=datetime.date(year=beat_timestamp.year, month=beat_timestamp.month, day=beat_timestamp.day)
         ))
 
     if commit_to_db:

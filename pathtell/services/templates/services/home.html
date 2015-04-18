@@ -1,0 +1,12 @@
+{% if success %}
+	Added new service!
+{% endif %}
+<!-- Fitbit -->
+<form action="{% url 'person_add_service' %}" method="POST">
+	{% csrf_token %}
+	<input type="hidden" name="service_id" value="1">
+	<input type="text" name="auth_token" placeholder="FitBit Auth Token">
+	<input type="submit">
+</form>
+
+<!-- Apple Watch (Not configured yet...) -->
