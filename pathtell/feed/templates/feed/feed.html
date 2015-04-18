@@ -1,30 +1,57 @@
 {% extends "common/base.html" %}
 {% block title %}My Feed{% endblock %}
 {% block content%}
-This is the feed page
-<div class='cond-alert-wrapper'>
-    <ul>
-        {% for alert in alerts %}
-        <a href="#event{{ alert.id }}">
-            <li class='cond-alert'>A test for {{ alert.condition }} was positive. Click to find out more</li>
-        </a>
-        {% endfor %}
-    </ul>
+{% if alerts %}
+<div class="panel panel-default alert-wrapper">
+    <div class="panel-heading">
+        Context Classes
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                {% for alert in alerts %}
+                <tr class="warning">
+
+                    <td>
+                        <div class='icon-circle cond-alert'><i class='fa fa-exclamation'></i></div>
+                    </td>
+                    <td>
+                        <div class='warning cond-alert'>&nbsp;A test for {{ alert.condition }} detected possible symptoms.&nbsp;</div>
+                    </td>
+                    <td>
+                        <div class='cond-alert'>
+                            <a href="#event{{ alert.id }}">
+                                <button type='button' class='btn btn-primary'>Find out more</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- /.table-responsive -->
+    </div>
+    <!-- /.panel-body -->
 </div>
-<div class='panel panel-default'>
+<!-- /.panel -->
+{% endif %}
+<div class='panel panel-default event-wrapper'>
     <div class='panel-heading'>
         Newsfeed
     </div>
-    <div class='event-wrapper panel-body'>
+    <div class='panel-body'>
         <ul class='timeline'>
             {% for e in events %}
             <li class='{% cycle '' 'timeline-inverted'%}'>
-            <a name='#event{{ e.id }}'></a>
+            <a id='event{{ e.id }}'></a>
             <div class="timeline-badge">
                 {% if e.result %}
-                <i class="fa fa-exclamation" style="color:red"></i>
+                <i class="fa fa-exclamation" style="color:#FFF200"></i>
                 {% else %}
-                <i class="fa fa-check"></i>
+                <i class="fa fa-check" style='color:#3CFF37'></i>
                 {% endif %}
             </div>
             <div class="timeline-panel">
@@ -36,7 +63,11 @@ This is the feed page
                     </p>
                 </div>
                 <div class="timeline-body">
-                    <p>A test ran for {{ e.condition }} and was {{ e.result }}.</p>
+                    {% if e.result %}
+                    <p>A test ran for {{ e.condition }} and no symptoms were detected. Awesome!</p>
+                    {% else %}
+                    <p>A test ran for {{ e.condition }} and possible symptoms were detected. You should consult with your doctor.</p>
+                    {% endif %}
                     <div id='event{{ e.id }}_graph'>Area chart to go here</p>
                     </div>
                 </div>
