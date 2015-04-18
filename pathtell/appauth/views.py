@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 
-def home(request, template='appauth/home.html'):
-    context = {}
+def home(request, template='landing/index.html'):
+    context = {'anchor':'#login'}
     return render(request, template, context)
 
 
@@ -26,7 +26,7 @@ def register_view(request, template='appauth/home.html'):
     context = {}
     context['form'] = form
     return render(request, template, context)
-    
+
 
 def login_view(request, template='appauth/home.html'):
     form = LoginForm(request.POST)

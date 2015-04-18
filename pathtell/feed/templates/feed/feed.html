@@ -43,18 +43,19 @@
         Newsfeed
     </div>
     <div class='panel-body'>
+        {% if events %}
         <ul class='timeline'>
             {% for e in events %}
             <li class='{% cycle '' 'timeline-inverted'%}'>
             <a id='event{{ e.id }}'></a>
             <div class="timeline-badge">
                 {% if e.result %}
-                <i class="fa fa-exclamation" style="color:#FFF200"></i>
-                {% else %}
                 <i class="fa fa-check" style='color:#3CFF37'></i>
+                {% else %}
+                <i class="fa fa-exclamation" style="color:#FFF200"></i>
                 {% endif %}
             </div>
-            <div class="timeline-panel">
+            <div class="timeline-panel" {% if not e.result %} style='background-color:#FFD9D9'{% endif %} >
                 <div class="timeline-heading">
                     <h4 class="timeline-title">{{ e.condition }} test</h4>
                     <p><small class="text-muted"><i class="fa fa-clock-o"></i>
@@ -62,19 +63,47 @@
                     </small>
                     </p>
                 </div>
-                <div class="timeline-body">
+                <div class="timeline-body" >
                     {% if e.result %}
                     <p>A test ran for {{ e.condition }} and no symptoms were detected. Awesome!</p>
                     {% else %}
                     <p>A test ran for {{ e.condition }} and possible symptoms were detected. You should consult with your doctor.</p>
                     {% endif %}
-                    <div id='event{{ e.id }}_graph'>Area chart to go here</p>
-                    </div>
+                    <div id="chart_{{ e.id }}" style="height: 250px;"></div>
                 </div>
             </div>
             </li>
             {% endfor %}
         </ul>
+        {% else %}
+        <div class="alert alert-success">
+            We haven't been able to record any data from your device yet! If you haven't linked it, please do so by accessing the settings page using the menu at the top right of the screen.
+        </div>
+        {% endif %}
     </div>
 </div>
+{% endblock %}
+{% block scripts %}
+<script>
+{% for e in events %}
+new Morris.Line({
+        // ID of the element in which to draw the chart.
+element: 'chart_{{ e.id }}',
+// Chart data records -- each entry in this array corresponds to a point on
+// the chart.
+data: [
+{% for i in e.getGraph %}
+{ time:'{{i.0}}', value:{{i.1}} },
+{% endfor %}
+],
+// The name of the data record attribute that contains x-values.
+xkey: 'time',
+// A list of names of data record attributes that contain y-values.
+ykeys: ['value'],
+// Labels for the ykeys -- will be displayed when you hover over the
+// chart.
+labels: ['Heart Rate']
+});
+{% endfor %}
+</script>
 {% endblock %}

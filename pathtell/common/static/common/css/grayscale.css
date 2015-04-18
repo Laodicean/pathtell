@@ -30,6 +30,11 @@ h6 {
     letter-spacing: 1px;
 }
 
+.login-form {
+    color: black;
+    padding: 10px;
+}
+
 .h2-style{
     margin: 0 0 35px;
     text-transform: uppercase;
