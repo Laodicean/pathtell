@@ -8,4 +8,8 @@ def classify(person):
     get_latest_user_data(person=person)
 
     # Run bradychardia classification
-    detect_daily_brady() 
+    daily_heart_rate_grouped = HeartBeatData.objects.filter(
+                                    person=person
+                                ).group_by('beat_timestamp')
+    for daily_heart_rate in HeartBeatData.objects.filter(person=person).group_by('beat_date'):
+        detect_daily_brady(daily_heart_rate)
