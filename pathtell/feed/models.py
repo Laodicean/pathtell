@@ -8,6 +8,6 @@ class Alert(models.Model):
 class Event(models.Model):
     result = models.BooleanField()
     condition = models.CharField(max_length=30)
-    timestamp = models.CharField(max_length=30)
-    event_graph = models.CharField(max_length=100000)
+    event_graph = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
 
