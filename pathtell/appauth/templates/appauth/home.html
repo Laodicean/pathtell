@@ -1,0 +1,18 @@
+<div>
+	<h4>Register</h4>
+	<form action="{% url 'appauth_register' %}" method="POST">
+		{% csrf_token %}
+		<input type="text" name="email">
+		<input type="text" name="password">
+		<input type="text" name="dob">
+		<input type="submit">
+	</form>
+
+	<h4>Login</h4>
+	<form action="{% url 'appauth_login' %}" method="POST">
+		{% csrf_token %}
+		<input type="text" name="email">
+		<input type="text" name="password">
+		<input type="submit">
+	</form>
+</div>

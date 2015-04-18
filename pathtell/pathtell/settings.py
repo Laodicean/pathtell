@@ -37,6 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'appauth',
+    'services',
+    'classifiers',
     'common',
     'feed',
     'landing'
@@ -103,3 +106,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Auth
+AUTH_PROFILE_MODULE = 'appauth.Person'

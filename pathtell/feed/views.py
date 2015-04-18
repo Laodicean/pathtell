@@ -1,16 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from feed.models import Event, Alert
-import copy
+from feed.logic.alerts import get_person_alerts
+from feed.logic.events import get_person_events
+# import copy
+
 
 # Create your views here.
 def feed(request, template='feed/feed.html'):
+    if not request.user.is_authenticated():
+        return redirect('appauth_home')
+    person = request.user.person
+    print(person)    
     context = {
-            'alerts':Alert.objects.all(),
-            'events':Event.objects.all()
-            }
-    context = testContext()
+        'alerts': get_person_alerts(person=person),
+        'events': get_person_events(person=person),
+    }
+    
     return render(request, template, context)
 
+"""
 def testContext():
     context = {
             'alerts':[],
@@ -32,3 +40,4 @@ def testContext():
         context['events'].append(copy.deepcopy(e))
 
     return context
+"""

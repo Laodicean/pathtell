@@ -20,5 +20,5 @@ class PersonFeatureData():
 
 class PersonServiceConnection(models.Model):
     user = models.ForeignKey('appauth.Person')
-    service = models.ForeignKey('service.Service')
+    service = models.ForeignKey('services.Service')
     auth_token = models.TextField()
