@@ -19,6 +19,6 @@ class PersonFeatureData():
 """     
 
 class PersonServiceConnection(models.Model):
-    user = models.ForeignKey('appauth.Person')
+    user = models.ForeignKey('appauth.Person', related_name='service_connections')
     service = models.ForeignKey('services.Service')
     auth_token = models.TextField()

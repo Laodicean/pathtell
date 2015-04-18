@@ -30,7 +30,7 @@ def _simulate_heart_beats(person_id, frequency, heart_rate, commit_to_db=True):
 
 
 def get_latest_person_data(person):
-    for users_service in person.service_connections:
+    for users_service in person.service_connections.all():
         # Retrieve the users information
         if users_service.service.name == 'fitbit':
             # TODO Actually retrieve FITBIT heart rate info from Partner API
