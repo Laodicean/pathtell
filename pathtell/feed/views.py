@@ -28,6 +28,7 @@ def testContext():
         e.id = i
         e.condition = "Condition %s" % i
         e.timestamp = str(i) * 10
+        e.result = (e.id % 2 == 0)
         context['events'].append(copy.deepcopy(e))
 
     return context
