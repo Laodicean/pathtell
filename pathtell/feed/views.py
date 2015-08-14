@@ -10,8 +10,8 @@ import random
 def feed(request, template='feed/feed.html'):
     if not request.user.is_authenticated():
         return redirect('appauth_home')
+
     person = request.user.person
-    print(person)
     context = {
         'alerts': get_person_alerts(person=person),
         'events': get_person_events(person=person),

@@ -1,2 +1,5 @@
+from feed.models import Alert
+
+
 def get_person_alerts(person):
-    pass
+    return Alert.objects.filter(person=person).order_by('-timestamp')

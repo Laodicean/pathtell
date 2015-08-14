@@ -9,10 +9,10 @@ class Person(models.Model):
     user = models.OneToOneField('auth.User')
     dob = models.DateField(blank=True, null=True)
 
-    def is_infant():
+    def is_infant(self):
         """ An infant is a human that is less than one year of age from now
         """
-        if (datetime.date.today() - self.dob) <= 365:
+        if (datetime.date.today() - self.dob).days <= 365:
             return True
         return False
 
